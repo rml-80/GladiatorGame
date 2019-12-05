@@ -22,52 +22,57 @@ namespace GladiatorGame
     {
         static void Main(String[] args)
         {
-            Random rnd = new Random();
-            var Gladiator = "";
-            int GladiatorHP = rnd.Next(10, 20); ;
-            int GladiatorStr = rnd.Next(5, 10);
-            var Enemy = "Test";
-            int EnemyHP = rnd.Next(5, GladiatorHP - 1);
-            int EnemyStr = rnd.Next(5, 10);
-            //var Strike = 1;
 
+            Random rnd = new Random();
+            Boolean loop = true;
+
+            Console.WriteLine("Welcome to the arena!!");
+            Console.WriteLine("The challanger fights untill death, ppl place ur bets");
             Console.WriteLine("Welcome to the game!");
             Console.Write("Please enter your name: ");
-            Gladiator = Console.ReadLine();
-            //GladiatorHP = rnd.Next(10, 20);
-            //GladiatorStr = rnd.Next(5, 10);
 
-            //Enemy = "test";
-            //EnemyHP = rnd.Next(5, GladiatorHP - 1);
-            //EnemyStr = rnd.Next(5, 10);
+            var n = Console.ReadLine();
 
-            Console.WriteLine("Let the battle begin!");
-            Console.WriteLine($"Gladiator HP: {GladiatorHP}");
-            Console.WriteLine($"Enemy HP: {EnemyHP}");
+            Player Gladiator = new Player(n, rnd.Next(10, 20), rnd.Next(5, 10));
+            Player Opponent = new Player("Test", rnd.Next(10, 20), rnd.Next(5, 10));
 
-            while (EnemyHP >= 0 && GladiatorHP >= 0)
+            Console.WriteLine($"Welcome {n}, lets see how strong you are today");
+
+            while (loop)
             {
-                Console.WriteLine("Choose your strike method");
-                Console.WriteLine("1. Fist");
-                Console.WriteLine("2. Kick");
-                var choice = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Now where do we wanna send the gladiator??");
+                Console.WriteLine("Choise 1: Enter the arena and fight untill death");
+                Console.WriteLine("Choise 2: See stats of the last fighter");
+                Console.WriteLine("Choise 3: Inventory list");
+                Console.WriteLine("Choise 4: Exit the game");
 
-                switch (choice)
+                int choise = Convert.ToInt32(Console.ReadLine());
+
+                switch (choise)
                 {
                     case 1:
-                        EnemyHP -= GladiatorStr;
+                        Console.WriteLine("Gladiator HP: " + Gladiator.Health);
+                        Console.WriteLine("Gladiatorn Strenght: " + Gladiator.Strenght);
+                        Console.WriteLine("Enemy HP: " + Opponent.Health);
+                        Console.WriteLine("Enemy Strenght: " + Opponent.Strenght);
+
+                        _ = new Fight(Gladiator, Opponent);
+
                         break;
                     case 2:
-                        EnemyHP -= (GladiatorStr * 2);
+
+                        break;
+                    case 3:
+
+                        break;
+                    case 4:
+                        loop = false;
                         break;
                     default:
+                        Console.WriteLine("You must choose a number between 1 - 4!");
                         break;
+
                 }
-                Console.WriteLine($"Enemys HP: {EnemyHP}");
-
-                GladiatorHP -= EnemyStr;
-                Console.WriteLine($"Gladiator HP: {GladiatorHP}");
-
             }
         }
     }

@@ -1,21 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Text;
 
-// not in use
+////// not in use
 
-namespace Gladiator_Game
-{
-    class stats
-    {
-        public int FistDamage { get; set; }
-        public int KickDamage { get; set; }
-        public int KneeDamage { get; set; }
+//namespace GladiatorGame
+//{
+//    class stats
+//    {
+//        public int GladiatorFist { get; set; }
+//        public int GladiatorKick { get; set; }
+//        public int GladiatorKnee { get; set; }
 
-        public void Fist()
-        {
-            FistDamage = 1;
-        }
+//        public void Fist()
+//        {
+//            Fighters f = new Fighters();
+//            GladiatorFist = f.GladiatorStr / 3;
+//            GladiatorKick = f.GladiatorStr;
+//            GladiatorKnee = f.GladiatorStr / 2;
+//        }
 
-    }
-}
+//        //    public static int Fight()
+//        //    {
+
+//        //        return choice;
+//        //    }
+//    }
+//}
+
