@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Players;
 
 //I denna uppgift ska du skapa ett gladiatorspel, där hjälten slåss mot x antal motståndare, tills han blir besegrad.
 //Följande funktioanlitet ska finnas med:
@@ -22,7 +23,6 @@ namespace GladiatorGame
     {
         static void Main(String[] args)
         {
-
             Random rnd = new Random();
             Boolean loop = true;
 
@@ -31,43 +31,56 @@ namespace GladiatorGame
             Console.WriteLine("Welcome to the game!");
             Console.Write("Please enter your name: ");
 
-            var n = Console.ReadLine();
-
-            Player Gladiator = new Player(n, rnd.Next(10, 20), rnd.Next(5, 10));
-            Player Opponent = new Player("Test", rnd.Next(10, 20), rnd.Next(5, 10));
+            string n = Console.ReadLine();
 
             Console.WriteLine($"Welcome {n}, lets see how strong you are today");
+            Console.WriteLine("----------------------------------------------------");
+
+            Player Gladiator = new Player(n, rnd.Next(15, 20), rnd.Next(5, 10));
+            var i = Gladiator.Health;
 
             while (loop)
             {
+                Gladiator.Health = i;
+                Player Opponent = new Player("Test", rnd.Next(10, i - 1), rnd.Next(5, 10));
+
                 Console.WriteLine("Now where do we wanna send the gladiator??");
+                Console.WriteLine("----------------------------------------------------");
+
                 Console.WriteLine("Choise 1: Enter the arena and fight untill death");
-                Console.WriteLine("Choise 2: See stats of the last fighter");
+                Console.WriteLine("Choise 2: Check stats from last fight");
                 Console.WriteLine("Choise 3: Inventory list");
                 Console.WriteLine("Choise 4: Exit the game");
+                Console.WriteLine("----------------------------------------------------");
 
                 int choise = Convert.ToInt32(Console.ReadLine());
 
                 switch (choise)
                 {
                     case 1:
+                        Console.WriteLine();
                         Console.WriteLine("Gladiator HP: " + Gladiator.Health);
                         Console.WriteLine("Gladiatorn Strenght: " + Gladiator.Strenght);
+                        Console.WriteLine();
                         Console.WriteLine("Enemy HP: " + Opponent.Health);
                         Console.WriteLine("Enemy Strenght: " + Opponent.Strenght);
+                        Console.WriteLine();
 
                         _ = new Fight(Gladiator, Opponent);
-
                         break;
+
                     case 2:
 
                         break;
+
                     case 3:
 
                         break;
+
                     case 4:
                         loop = false;
                         break;
+
                     default:
                         Console.WriteLine("You must choose a number between 1 - 4!");
                         break;

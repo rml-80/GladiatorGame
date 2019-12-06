@@ -1,30 +1,38 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-////// not in use
+// not in use
 
-//namespace GladiatorGame
-//{
-//    class stats
-//    {
-//        public int GladiatorFist { get; set; }
-//        public int GladiatorKick { get; set; }
-//        public int GladiatorKnee { get; set; }
+namespace GladiatorGame
+{
+    class Stats
+    {
+        public int GladiatorWins { get; set; }
 
-//        public void Fist()
-//        {
-//            Fighters f = new Fighters();
-//            GladiatorFist = f.GladiatorStr / 3;
-//            GladiatorKick = f.GladiatorStr;
-//            GladiatorKnee = f.GladiatorStr / 2;
-//        }
+        //        public void GWins()
+        //        {
+        //            GladiatorWins++;
+        //        }
 
-//        //    public static int Fight()
-//        //    {
-
-//        //        return choice;
-//        //    }
-//    }
-//}
+        public int OpponentWins { get; set; }
+        
+        //        public void OWins()
+        //        {
+        //            OpponentWins++;
+        //        }
+        //int GladiatorWins = 0;
+        //int OpponentWins = 0;
+        //public int GWins()
+        //{
+        //    GladiatorWins++;
+        //    return GladiatorWins;
+        //}
+        //public int OWins()
+        //{
+        //    OpponentWins++;
+        //    return OpponentWins;
+        //}
+    }
+}
 
