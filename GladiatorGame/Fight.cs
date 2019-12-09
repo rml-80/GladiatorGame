@@ -9,9 +9,19 @@ namespace GladiatorGame
     {
         public Fight(Player Gladiator, Player Opponent)
         {
-            Stats G = new Stats();
+            
             while (true)
             {
+                Gladiator.Damage = 0;
+                Opponent.Damage = 0;
+
+                Console.WriteLine($"Gladiator HP {Gladiator.Health}");
+                Console.WriteLine($"Gladiator Str {Gladiator.Strenght}");
+                Console.WriteLine();
+                Console.WriteLine($"Opponent HP {Opponent.Health}");
+                Console.WriteLine($"Opponent Str {Opponent.Strenght}");
+                Console.WriteLine("-----------------------------");
+                Console.WriteLine();
                 Console.WriteLine("-------------------------");
                 Console.WriteLine("Choose your strike method");
                 Console.WriteLine("1. Fist");
@@ -24,29 +34,40 @@ namespace GladiatorGame
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine($"Damage by {Gladiator.Name}: {Gladiator.Fist(Gladiator.Strenght)}");
+                        int s1 = Gladiator.Fist();
+                        Console.WriteLine($"Fist strike! Damage by {Gladiator.Name}: {s1}");
                         Console.WriteLine();
-                        Opponent.Health -= Gladiator.Fist(Gladiator.Strenght);
+                        Opponent.Health -= s1;
+                        Gladiator.Damage = s1;
                         break;
                     case 2:
-                        Console.WriteLine($"Damage by {Gladiator.Name}: {Gladiator.Kick(Gladiator.Strenght)}");
+                        int s2 = Gladiator.Kick();
+                        Console.WriteLine($"Kick strike! Damage by {Gladiator.Name}: {s2}");
                         Console.WriteLine();
-                        Opponent.Health -= Gladiator.Kick(Gladiator.Strenght);
+                        Opponent.Health -= s2;
+                        Gladiator.Damage = s2;
                         break;
                     case 3:
-                        Console.WriteLine($"Damage by {Gladiator.Name}: {Gladiator.Knee(Gladiator.Strenght)}");
+                        int s3 = Gladiator.Knee();
+                        Console.WriteLine($"Knee strike! Damage by {Gladiator.Name}: {s3}");
                         Console.WriteLine();
-                        Opponent.Health -= Gladiator.Knee(Gladiator.Strenght);
+                        Opponent.Health -= s3;
+                        Gladiator.Damage = s3;
                         break;
                     default:
                         break;
                 }
+                Gladiator.Strikes++;
+                Gladiator.TotalStrikes += Gladiator.Strikes;
+                Gladiator.TotalDmg += Gladiator.Damage;
 
                 if (Opponent.Health <= 0)
                 {
                     Console.WriteLine("Opponent knocked!");
-                    G.GladiatorWins++;
-                    Console.WriteLine($"{Gladiator.Name} has won {G.GladiatorWins} times");
+                    Gladiator.Wins++;
+                    Console.WriteLine($"{Gladiator.Name} has won {Gladiator.Wins} times");
+                    Console.WriteLine($"With {Gladiator.Strikes} strikes!");
+                    Console.WriteLine($"Total damage by {Gladiator.Name} was {Gladiator.Damage}");
                     break;
                 }
 
@@ -56,35 +77,48 @@ namespace GladiatorGame
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine($"Fist strike! Damage by {Opponent.Name}: {Opponent.Fist(Opponent.Strenght)}");
+                        int o1 = Opponent.Fist();
+                        Console.WriteLine($"Fist strike! Damage by {Opponent.Name}: {o1}");
                         Console.WriteLine();
-                        Gladiator.Health -= Opponent.Fist(Opponent.Strenght);
+                        Gladiator.Health -= o1;
+                        Opponent.Damage = o1;
                         break;
                     case 2:
-                        Console.WriteLine($"Kick strike! Damage by {Opponent.Name}: {Opponent.Kick(Opponent.Strenght)}");
+                        int o2 = Opponent.Kick();
+                        Console.WriteLine($"Kick strike! Damage by {Opponent.Name}: {o2}");
                         Console.WriteLine();
-                        Gladiator.Health -= Gladiator.Kick(Opponent.Strenght);
+                        Gladiator.Health -= o2;
+                        Opponent.Damage = o2;
                         break;
                     case 3:
-                        Console.WriteLine($"Knee strike! Damage by {Opponent.Name}: {Opponent.Knee(Opponent.Strenght)}");
+                        int o3 = Opponent.Knee();
+                        Console.WriteLine($"Knee strike! Damage by {Opponent.Name}: {o3}");
                         Console.WriteLine();
-                        Gladiator.Health -= Opponent.Knee(Opponent.Strenght);
+                        Gladiator.Health -= o3;
+                        Opponent.Damage = o3;
                         break;
                     default:
                         break;
                 }
+                Opponent.Strikes++;
+                Opponent.TotalStrikes += Opponent.Strikes;
+                Opponent.TotalDmg += Opponent.Damage;
 
                 if (Gladiator.Health <= 0)
                 {
                     Console.WriteLine("Gladiator knocked!");
-                    G.OpponentWins++;
-                    Console.WriteLine($"{Opponent.Name} has won {G.OpponentWins} times");
+                    Opponent.Wins++;
+                    Console.WriteLine($"{Opponent.Name} has won {Opponent.Wins} times");
+                    Console.WriteLine($"With {Opponent.Strikes} strikes!");
+                    Console.WriteLine($"Total damage by {Opponent.Name} was {Opponent.Damage}");
                     break;
                 }
-                Console.WriteLine();
-                Console.WriteLine($"{Gladiator.Name} HP: {Gladiator.Health}");
-                Console.WriteLine($"{Opponent.Name} HP: {Opponent.Health}");
-                Console.WriteLine();
+
+
+                //Console.WriteLine();
+                //Console.WriteLine($"Total damage by {Gladiator.Name} is {Gladiator.TotalDmg}");
+                //Console.WriteLine($"Total damage by {Opponent.Name} is {Opponent.TotalDmg}");
+                //Console.WriteLine();
             }
         }
     }

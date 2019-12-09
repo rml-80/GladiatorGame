@@ -25,6 +25,7 @@ namespace GladiatorGame
         {
             Random rnd = new Random();
             Boolean loop = true;
+            Stats s = new Stats();
 
             Console.WriteLine("Welcome to the arena!!");
             Console.WriteLine("The challanger fights untill death, ppl place ur bets");
@@ -36,13 +37,28 @@ namespace GladiatorGame
             Console.WriteLine($"Welcome {n}, lets see how strong you are today");
             Console.WriteLine("----------------------------------------------------");
 
-            Player Gladiator = new Player(n, rnd.Next(15, 20), rnd.Next(5, 10));
-            var i = Gladiator.Health;
+            //Create Gladiator TODO move to player
+            Player Gladiator = new Player
+            {
+                Name = n,
+                Wins = 0,
+                Damage = 0
+            };
+            //Create Opponent (Enemy)
+            Player Opponent = new Player
+            {
+                Name = string.Empty,
+                Wins = 0,
+                Damage = 0
+            };
 
             while (loop)
             {
-                Gladiator.Health = i;
-                Player Opponent = new Player("Test", rnd.Next(10, i - 1), rnd.Next(5, 10));
+                Gladiator.Health = rnd.Next(10, 20);    // Generate value for Health for each combat
+                Gladiator.Strenght = rnd.Next(5, 10);   // Generate value for Strenght for each combat
+                Opponent.Name = "Test";
+                Opponent.Health = rnd.Next(10, 18);     // Generate value for Health for each combat
+                Opponent.Strenght = rnd.Next(5, 10);    // Generate value for Strenght for each combat
 
                 Console.WriteLine("Now where do we wanna send the gladiator??");
                 Console.WriteLine("----------------------------------------------------");
@@ -58,18 +74,22 @@ namespace GladiatorGame
                 switch (choise)
                 {
                     case 1:
-                        Console.WriteLine();
-                        Console.WriteLine("Gladiator HP: " + Gladiator.Health);
-                        Console.WriteLine("Gladiatorn Strenght: " + Gladiator.Strenght);
-                        Console.WriteLine();
-                        Console.WriteLine("Enemy HP: " + Opponent.Health);
-                        Console.WriteLine("Enemy Strenght: " + Opponent.Strenght);
-                        Console.WriteLine();
-
                         _ = new Fight(Gladiator, Opponent);
                         break;
 
                     case 2:
+
+                        Console.WriteLine();
+                        Console.WriteLine($"Gladiator wins: {Gladiator.Wins}");
+                        Console.WriteLine($"Damage dealt by gladiator {Gladiator.TotalDmg}");
+                        Console.WriteLine($"Strikes by gladiator {Gladiator.TotalStrikes}");
+                        Console.WriteLine();
+                        Console.WriteLine($"Opponent wins: {Opponent.Wins}");
+                        Console.WriteLine($"Damage dealt by opponent {Opponent.TotalDmg}");
+                        Console.WriteLine($"Strikes by opponent {Opponent.TotalStrikes}");
+                        Console.WriteLine();
+                        Console.WriteLine("TEST");
+                        Console.WriteLine(s.Stat());
 
                         break;
 

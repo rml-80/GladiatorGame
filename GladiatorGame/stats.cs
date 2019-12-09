@@ -1,38 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
-// not in use
+using Players;
 
 namespace GladiatorGame
 {
     class Stats
     {
-        public int GladiatorWins { get; set; }
+        public int Stat()
+        {
+            Player Gladiator = new Player();
+            int gDmg = Gladiator.TotalDmg;
+            //Console.WriteLine((int)Gladiator.Strenght);
+            return gDmg;
+        }
 
-        //        public void GWins()
-        //        {
-        //            GladiatorWins++;
-        //        }
-
-        public int OpponentWins { get; set; }
-        
-        //        public void OWins()
-        //        {
-        //            OpponentWins++;
-        //        }
-        //int GladiatorWins = 0;
-        //int OpponentWins = 0;
-        //public int GWins()
-        //{
-        //    GladiatorWins++;
-        //    return GladiatorWins;
-        //}
-        //public int OWins()
-        //{
-        //    OpponentWins++;
-        //    return OpponentWins;
-        //}
     }
 }
-

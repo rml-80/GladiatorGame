@@ -6,33 +6,33 @@ namespace Players
 {
     class Player
     {
-        public Player(string N, int H, int S)
-        {
-            Name = N;
-            Health = H;
-            Strenght = S;
-        }
-
         public string Name { get; set; }
         public int Health { get; set; }
         public int Strenght { get; set; }
-        
-        public int Fist(int dmg)
+        public int Wins { get; set; }
+        public int Strikes { get; set; } // by fight
+        public int TotalStrikes { get; set; }
+        public int Damage { get; set; } //by fight
+        public int TotalDmg { get; set; }
+
+        // methods to calculate damage
+        public int Fist()
         {
-            dmg = dmg / 2;
+            int dmg = Strenght / 2;
             return dmg;
         }
 
-        public int Kick(int dmg)
+        public int Kick()
         {
+            int dmg = Strenght;
             return dmg;
         }
 
-        public int Knee(int dmg)
+        public int Knee()
         {
-            dmg = dmg / 3;
+            int dmg = Strenght / 3;
             return dmg;
-        }      
+        }
     }
 }
 
