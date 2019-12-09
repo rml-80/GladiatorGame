@@ -6,14 +6,22 @@ namespace Players
 {
     class Player
     {
-        //public Player() { }
+        public Player() { }
 
-        //public Player(int HP, int Str)
-        //{
-        //    //name = Name;
-        //    HP = Health;
-        //    Str = Strenght;
-        //}
+        public Player(string Name, int Health, int Strenght)        //TODO do we need this??? NOT IN USE
+        {
+            this.Name = Name;
+            this.Health = Health;
+            this.Strenght = Strenght;
+        }
+        public Player(string Name, int Health, int Strenght,int Strikes, int Damage)
+        {
+            this.Name = Name;
+            this.Health = Health;
+            this.Strenght = Strenght;
+            this.Strikes = Strikes;
+            this.Damage = Damage;
+        }
 
         public string Name { get; set; }
         public int Health { get; set; }
@@ -23,8 +31,10 @@ namespace Players
         public int TotalStrikes { get; set; }
         public int Damage { get; set; } //by fight
         public int TotalDmg { get; set; }
+        public int FightDmg { get; set; }
+        public int Round { get; set; }
 
-        // methods to calculate damage
+        // methods to calculate damage // TODO random for damage calculation???
         public int Fist()
         {
             int dmg = Strenght / 2;

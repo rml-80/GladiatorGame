@@ -7,14 +7,18 @@ namespace GladiatorGame
 {
     class Fight
     {
-        public Fight(Player Gladiator, Player Opponent)
+         
+        public Fight(Player Gladiator, Player Opponent, Player Enemys)
         {
             while (true)
             {
-                //Gladiator.Damage = 0;
+                Gladiator.Damage = 0;
                 //Gladiator.Strikes = 0;
-                //Opponent.Damage = 0;
+                Opponent.Damage = 0;
                 //Opponent.Strikes = 0;
+
+                Console.WriteLine();
+                Console.WriteLine($"Round {Enemys.Round}");
                 Console.WriteLine();
                 Console.WriteLine($"Gladiator: {Gladiator.Name}");
                 Console.WriteLine($"Gladiator HP {Gladiator.Health}");
@@ -62,18 +66,22 @@ namespace GladiatorGame
                 }
                 Gladiator.Strikes++;
                 Gladiator.TotalStrikes += Gladiator.Strikes;
-                Gladiator.Damage += Gladiator.Damage;
+                Gladiator.FightDmg += Gladiator.Damage;
+                Gladiator.TotalDmg += Gladiator.Damage;
 
                 if (Opponent.Health <= 0)
                 {
                     Console.WriteLine("Opponent knocked!");
                     Opponent.Health = 0;
                     Gladiator.Wins++;
-                    Console.WriteLine($"With {Gladiator.Strikes} strikes!"); // FLYTTAD
+                    Console.WriteLine($"With {Gladiator.Strikes} strikes!");                    // FLYTTAD
                     Console.WriteLine($"{Gladiator.Name} has won {Gladiator.Wins} times");
-                    Console.WriteLine($"Total damage by {Gladiator.Name} was {Gladiator.Damage}");
-                    Console.WriteLine($"Opponent made damage by: {Opponent.Damage}");
-                    Opponent.RemoveEnemy();
+                    Console.WriteLine($"Total damage by {Gladiator.Name} was {Gladiator.FightDmg}");
+                    Console.WriteLine($"Opponent made damage by: {Opponent.TotalDmg}");
+                    Gladiator.FightDmg = 0;
+                    Gladiator.Strikes = 0;
+                    Gladiator.RemoveEnemy();
+                    Enemys.Round++;
                     break;
                 }
 
@@ -107,8 +115,11 @@ namespace GladiatorGame
                         break;
                 }
                 Opponent.Strikes++;
-                Opponent.TotalStrikes += Opponent.Strikes;
-                Opponent.Damage += Opponent.Damage;
+                Opponent.TotalDmg += Opponent.Damage;
+                Enemys.TotalStrikes += Opponent.Strikes;
+                Enemys.TotalDmg += Opponent.Damage;
+
+
 
                 if (Gladiator.Health <= 0)
                 {
@@ -117,15 +128,19 @@ namespace GladiatorGame
                     if (Gladiator.Health == 0)
                     {
                         Gladiator.Health = rnd.Next(10, 20);
+                        Gladiator.Strenght = rnd.Next(5, 10);
                     }
                     Opponent.Wins++;
-                    Console.WriteLine($"With {Opponent.Strikes} strikes!"); // FLYTTAD
+                    Enemys.Wins++;
+                    Console.WriteLine($"With {Opponent.Strikes} strikes!");                             // FLYTTAD
                     Console.WriteLine($"{Opponent.Name} has won {Opponent.Wins} times");
-                    Console.WriteLine($"Total damage by {Opponent.Name} was {Opponent.Damage}");
-                    Console.WriteLine($"Gladiator made damage by: {Gladiator.Damage}");
+                    Console.WriteLine($"Total damage by {Opponent.Name} was {Opponent.TotalDmg}");
+                    Console.WriteLine($"Gladiator made damage by: {Gladiator.FightDmg}");
+                    Gladiator.FightDmg = 0;
+                    Gladiator.Strikes = 0;
+                    Enemys.Round++;
                     break;
                 }
-
 
                 //Console.WriteLine();
                 //Console.WriteLine($"Total damage by {Gladiator.Name} is {Gladiator.TotalDmg}");

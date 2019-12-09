@@ -26,7 +26,7 @@ namespace GladiatorGame
         {
             Random rnd = new Random();
             Boolean loop = true;
-            //Player Enemys = new Player();
+            Player Enemys = new Player();
 
             Console.WriteLine("Welcome to the arena!!");
             Console.WriteLine("The challanger fights untill death, ppl place ur bets");
@@ -39,26 +39,42 @@ namespace GladiatorGame
             Console.WriteLine("----------------------------------------------------");
 
             //Create Gladiator 
-            Player Gladiator = new Player();
-            Gladiator.Name = name;
-            Gladiator.Health = rnd.Next(10, 20);
-            Gladiator.Strenght = rnd.Next(5, 10);
+            Player Gladiator = new Player(name, rnd.Next(10, 20), rnd.Next(5, 10), 0, 0);
+            //Gladiator.Name = name;
+            //Gladiator.Health = rnd.Next(10, 20);
+            //Gladiator.Strenght = rnd.Next(5, 10);
 
             //Create Opponent (Enemy)
-            Player Opponent = new Player();
-            Opponent.EnemyNamelist();
+            //Player Opponent = new Player();
+            Gladiator.EnemyNamelist();
+            Enemys.Round = 1;       //strat counting on 1
+
             //int m = Opponent.EnemyNames.Count;
             //Console.WriteLine(m + " Enemys");
             while (loop)
             {
-                Gladiator.Strikes = 0; // FLYTTAD
-                Gladiator.Damage = 0; // FLYTTAD
-                //Opponent.OpponentNumber = Opponent.EnemyNames[0];
-                Opponent.Name = Opponent.EnemyNames[0];
-                Opponent.Health = rnd.Next(10, 18);     // Generate value for Health for each combat
-                Opponent.Strenght = rnd.Next(5, 10);    // Generate value for Strenght for each combat
-                Opponent.Strikes = 0; // FLYTTAD
-                Opponent.Damage = 0; // FLYTTAD
+                int E = Gladiator.EnemyNames.Count;
+                Console.WriteLine($"Enemys left: {E}");
+                if (Gladiator.EnemyNames.Count <= 0)    //if enemylist is empty end game
+                {
+                    Console.WriteLine($"All Opponents has been beaten. You are the champion!!!!");
+                    break;      //break out of the game
+                }
+                //Gladiator.Strikes = 0; // FLYTTAD
+                //Gladiator.Damage = 0; // FLYTTAD
+                //Opponent.OpponentNumber = Enemys.EnemyNames[0];
+                Player Opponent = new Player(Gladiator.EnemyNames[0], rnd.Next(10, 18), rnd.Next(5, 10),0,0);     //Generate new opponent for each fight
+
+                //Opponent.EnemyNamelist();
+
+
+
+                //Opponent.Name = Opponent.EnemyNames[0];
+                //Opponent.Health = rnd.Next(10, 18);     // Generate value for Health for each combat
+                //Opponent.Strenght = rnd.Next(5, 10);    // Generate value for Strenght for each combat
+                //Opponent.Strikes = 0; // FLYTTAD
+                //Opponent.Damage = 0; // FLYTTAD
+
                 Console.WriteLine();
                 Console.WriteLine("Now where do we wanna send the gladiator??");
                 Console.WriteLine("----------------------------------------------------");
@@ -74,25 +90,38 @@ namespace GladiatorGame
                 switch (choise)
                 {
                     case 1:
-                        _ = new Fight(Gladiator, Opponent);
+                        //_ = new Fight(Gladiator, Opponent);
+
+                        //if (rnd.Next(0, 10) < 5)
+                        //{
+                        _ = new Fight(Gladiator, Opponent, Enemys);
+
+                        //}
+                        //else
+                        //{
+                        //    _ = new Fight(Opponent, Gladiator, false);
+                        //}
+
+
                         break;
 
                     case 2:
 
                         Console.WriteLine();
+                        Console.WriteLine($"Rounds played: {Enemys.Round - 1} ");       // for displaying correct amount of rounds
+                        Console.WriteLine();
                         Console.WriteLine($"Gladiator wins: {Gladiator.Wins}");
                         Console.WriteLine($"Damage dealt by gladiator {Gladiator.TotalDmg}");
-                        Console.WriteLine($"Strikes by gladiator {Gladiator.TotalStrikes}");
                         Console.WriteLine();
-                        Console.WriteLine($"Opponent wins: {Opponent.Wins}");
-                        Console.WriteLine($"Damage dealt by opponent {Opponent.TotalDmg}");
-                        Console.WriteLine($"Strikes by opponent {Opponent.TotalStrikes}");
+                        Console.WriteLine($"Opponent wins: {Enemys.Wins}");
+                        Console.WriteLine($"Damage dealt by opponent {Enemys.TotalDmg}");
+
 
                         break;
 
                     case 3:
                         Console.WriteLine();
-                        foreach (var item in Opponent.EnemyNames)
+                        foreach (var item in Gladiator.EnemyNames)
                         {
                             Console.WriteLine(item);
                         }
