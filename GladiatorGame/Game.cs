@@ -51,10 +51,14 @@ namespace GladiatorGame
             //Console.WriteLine(m + " Enemys");
             while (loop)
             {
+                Gladiator.Strikes = 0; // FLYTTAD
+                Gladiator.Damage = 0; // FLYTTAD
                 //Opponent.OpponentNumber = Opponent.EnemyNames[0];
                 Opponent.Name = Opponent.EnemyNames[0];
                 Opponent.Health = rnd.Next(10, 18);     // Generate value for Health for each combat
                 Opponent.Strenght = rnd.Next(5, 10);    // Generate value for Strenght for each combat
+                Opponent.Strikes = 0; // FLYTTAD
+                Opponent.Damage = 0; // FLYTTAD
                 Console.WriteLine();
                 Console.WriteLine("Now where do we wanna send the gladiator??");
                 Console.WriteLine("----------------------------------------------------");

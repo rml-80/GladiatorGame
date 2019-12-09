@@ -6,7 +6,8 @@ namespace Players
 {
     class Player
     {
-        public Player() { }
+        //public Player() { }
+
         //public Player(int HP, int Str)
         //{
         //    //name = Name;
