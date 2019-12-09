@@ -9,15 +9,18 @@ namespace GladiatorGame
     {
         public Fight(Player Gladiator, Player Opponent)
         {
-            
             while (true)
             {
                 Gladiator.Damage = 0;
+                Gladiator.Strikes = 0;
                 Opponent.Damage = 0;
-
+                Opponent.Strikes = 0;
+                Console.WriteLine();
+                Console.WriteLine($"Gladiator: {Gladiator.Name}");
                 Console.WriteLine($"Gladiator HP {Gladiator.Health}");
                 Console.WriteLine($"Gladiator Str {Gladiator.Strenght}");
                 Console.WriteLine();
+                Console.WriteLine($"Opponent: {Opponent.Name}");
                 Console.WriteLine($"Opponent HP {Opponent.Health}");
                 Console.WriteLine($"Opponent Str {Opponent.Strenght}");
                 Console.WriteLine("-----------------------------");
@@ -64,10 +67,12 @@ namespace GladiatorGame
                 if (Opponent.Health <= 0)
                 {
                     Console.WriteLine("Opponent knocked!");
+                    Opponent.Health = 0;
                     Gladiator.Wins++;
                     Console.WriteLine($"{Gladiator.Name} has won {Gladiator.Wins} times");
                     Console.WriteLine($"With {Gladiator.Strikes} strikes!");
                     Console.WriteLine($"Total damage by {Gladiator.Name} was {Gladiator.Damage}");
+                    Opponent.RemoveEnemy();
                     break;
                 }
 
@@ -107,6 +112,11 @@ namespace GladiatorGame
                 if (Gladiator.Health <= 0)
                 {
                     Console.WriteLine("Gladiator knocked!");
+                    Gladiator.Health = 0;
+                    if (Gladiator.Health == 0)
+                    {
+                        Gladiator.Health = rnd.Next(10, 20);
+                    }
                     Opponent.Wins++;
                     Console.WriteLine($"{Opponent.Name} has won {Opponent.Wins} times");
                     Console.WriteLine($"With {Opponent.Strikes} strikes!");
@@ -120,6 +130,7 @@ namespace GladiatorGame
                 //Console.WriteLine($"Total damage by {Opponent.Name} is {Opponent.TotalDmg}");
                 //Console.WriteLine();
             }
+
         }
     }
 }

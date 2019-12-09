@@ -7,13 +7,9 @@ namespace GladiatorGame
 {
     class Stats
     {
-        public int Stat()
+        public Stats()
         {
-            Player Gladiator = new Player();
-            int gDmg = Gladiator.TotalDmg;
-            //Console.WriteLine((int)Gladiator.Strenght);
-            return gDmg;
         }
-
+  
     }
 }

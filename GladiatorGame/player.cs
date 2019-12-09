@@ -6,6 +6,14 @@ namespace Players
 {
     class Player
     {
+        public Player() { }
+        //public Player(int HP, int Str)
+        //{
+        //    //name = Name;
+        //    HP = Health;
+        //    Str = Strenght;
+        //}
+
         public string Name { get; set; }
         public int Health { get; set; }
         public int Strenght { get; set; }
@@ -33,6 +41,29 @@ namespace Players
             int dmg = Strenght / 3;
             return dmg;
         }
+
+        public List<String> EnemyNames = new List<String>();
+        
+        public void EnemyNamelist()
+        {
+            EnemyNames.Add("Cassius Gabinius");
+            EnemyNames.Add("Marcellus Burrienus");
+            EnemyNames.Add("Agaza Kingspell");
+            EnemyNames.Add("Jaenwilliams Pomar");
+            EnemyNames.Add("Antibar Satanbennett");
+            EnemyNames.Add("Roberfang O'neilllok");
+            EnemyNames.Add("Drusprice Rosenker");
+            EnemyNames.Add("Peaknee Glenalvare");
+            EnemyNames.Add("Ortiphine Jonefur");
+            EnemyNames.Add("Willpatterson Graylok");
+        }
+
+        public void RemoveEnemy()
+        {
+            EnemyNames.RemoveAt(0);
+        }
     }
+
 }
+
 
