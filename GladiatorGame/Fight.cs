@@ -90,8 +90,14 @@ namespace GladiatorGame
                     Console.WriteLine($"{P1.Name} has won {P1.Wins} times");
                     Console.WriteLine($"Total damage by {P1.Name} was {P1.FightDmg}");
                     Console.WriteLine($"{P2.Name} made damage by: {P2.FightDmg}");
-
-                    S.AddToList(Enemys.Round, Gladiator.Strikes, Gladiator.FightDmg);
+                    if (Gladiator.Health <= 0)
+                    {
+                        S.AddToList(Enemys.Round, Gladiator.Strikes, Gladiator.FightDmg);
+                    }
+                    else
+                    {
+                        S.AddToList(Enemys.Round, Gladiator.Strikes, Gladiator.FightDmg, Opponent.Name);
+                    }
 
                     Gladiator.FightDmg = 0;
                     Gladiator.Strikes = 0;

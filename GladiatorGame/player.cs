@@ -8,8 +8,8 @@ namespace Players
     {
         public Player() { }
 
-        public Player(string Name, int Health, int Strenght)        //TODO do we need this??? NOT IN USE
-        {
+        public Player(string Name, int Health, int Strenght)
+        { 
             this.Name = Name;
             this.Health = Health;
             this.Strenght = Strenght;
