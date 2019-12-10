@@ -7,9 +7,6 @@ namespace GladiatorGame
 {
     class Stats
     {
-        public Stats()
-        {
-        }
-  
+
     }
 }
