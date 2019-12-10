@@ -7,7 +7,8 @@ namespace GladiatorGame
 {
     class Fight
     {
-        public Fight(Player Gladiator, Player Opponent, Player Enemys)
+
+        public Fight(Player Gladiator, Player Opponent, Player Enemys,Statistics S)
         {
             var P1 = Gladiator;
             var P2 = Opponent;
@@ -89,6 +90,8 @@ namespace GladiatorGame
                     Console.WriteLine($"{P1.Name} has won {P1.Wins} times");
                     Console.WriteLine($"Total damage by {P1.Name} was {P1.FightDmg}");
                     Console.WriteLine($"{P2.Name} made damage by: {P2.FightDmg}");
+
+                    S.AddToList(Enemys.Round, Gladiator.Strikes, Gladiator.FightDmg);
 
                     Gladiator.FightDmg = 0;
                     Gladiator.Strikes = 0;

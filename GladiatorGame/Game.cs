@@ -26,6 +26,7 @@ namespace GladiatorGame
             Random rnd = new Random();
             Boolean loop = true;
             Player Enemys = new Player();
+            Statistics S = new Statistics();
 
             Console.WriteLine("Welcome to the arena!!");
             Console.WriteLine("The challanger fights untill death, ppl place ur bets");
@@ -45,8 +46,8 @@ namespace GladiatorGame
 
             while (loop)
             {
-                int E = Gladiator.EnemyNames.Count;
-                Console.WriteLine($"Enemys left: {E}");
+                Console.WriteLine();
+                Console.WriteLine($"Enemys left: {Gladiator.EnemyNames.Count}");
                 if (Gladiator.EnemyNames.Count <= 0)    //if enemylist is empty end game
                 {
                     Console.WriteLine($"All Opponents has been beaten. You are the champion!!!!");
@@ -70,7 +71,7 @@ namespace GladiatorGame
                 switch (choise)
                 {
                     case 1:
-                        _ = new Fight(Gladiator, Opponent, Enemys);
+                        _ = new Fight(Gladiator, Opponent, Enemys,S);
                         break;
 
                     case 2:
@@ -95,7 +96,7 @@ namespace GladiatorGame
                         break;
 
                     case 4:
-                        Console.WriteLine("Coming soon!!!");
+                        S.DisplayStat();
                         break;
                     case 9:
                         loop = false;
