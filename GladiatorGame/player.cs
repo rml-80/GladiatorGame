@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Players
+namespace GladiatorGame
 {
-    class Player
+    class player
     {
-        public Player() { }
+        public player() { }
 
-        public Player(string Name, int Health, int Strenght)
+        public player(string Name, int Health, int Strenght)
         { 
             this.Name = Name;
             this.Health = Health;
             this.Strenght = Strenght;
         }
-        public Player(string Name, int Health, int Strenght,int Strikes, int Damage)
+        public player(string Name, int Health, int Strenght,int Strikes, int Damage)
         {
             this.Name = Name;
             this.Health = Health;

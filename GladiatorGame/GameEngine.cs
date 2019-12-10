@@ -1,17 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Players;
+using GladiatorGame;
 
 namespace GladiatorGame
 {
-    class Fight
+    class GameEngine
     {
-
-        public Fight(Player Gladiator, Player Opponent, Player Enemys,Statistics S)
+        public GameEngine(player Gladiator, player Opponent, player Enemys, Statistics S, Equipment items, Slaughter Slaughtered)
         {
             var P1 = Gladiator;
             var P2 = Opponent;
+
+            if (items.UsingArmor)
+            {
+            Gladiator.Health += items.Armor;        //idea to add ArmorPoints
+            }
+            if (items.UsingWeapon)
+            {
+            Gladiator.Strenght += items.Weapon;     //idea to add WeaponPoints
+            }
 
             Random rnd = new Random();
             if (rnd.Next(0, 10) < 5)
@@ -26,11 +34,11 @@ namespace GladiatorGame
                 Gladiator.Damage = 0;
                 Opponent.Damage = 0;
 
-                DisplayStartInfo(Gladiator, Opponent, Enemys);
+                DisplayStartInfo(Gladiator, Opponent, Enemys);          // Not a good place to have it
 
-                
                 if (P1 == Gladiator)
                 {
+
                     Console.WriteLine("-------------------------");
                     Console.WriteLine("Choose your strike method");
                     Console.WriteLine("1. Fist");
@@ -39,6 +47,7 @@ namespace GladiatorGame
                     Console.WriteLine("-------------------------");
 
                     choice = Convert.ToInt32(Console.ReadLine());
+
                 }
                 else
                 {
@@ -83,7 +92,7 @@ namespace GladiatorGame
 
                 if (P2.Health <= 0)
                 {
-                    Console.WriteLine($"{P2.Name} knocked!");
+                    Console.WriteLine($"{P2.Name} slaughtered!");
                     P2.Health = 0;
                     P1.Wins++;
                     Console.WriteLine($"With {P1.Strikes} strikes!");
@@ -92,11 +101,42 @@ namespace GladiatorGame
                     Console.WriteLine($"{P2.Name} made damage by: {P2.FightDmg}");
                     if (Gladiator.Health <= 0)
                     {
-                        S.AddToList(Enemys.Round, Gladiator.Strikes, Gladiator.FightDmg);
+                        S.msg = S.LosingMsg;
+                        S.AddToList(Enemys.Round, Gladiator.Strikes, Gladiator.FightDmg, S.msg, Opponent.Name);
+                        items.HaveArmor = false;            // losing armor if beaten
+                        items.HaveWeapon = false;            // losing Weapon if beaten
+                        items.UsingArmor = false;            // losing armor if beaten
+                        items.UsingWeapon = false;            // losing Weapon if beaten
                     }
                     else
                     {
-                        S.AddToList(Enemys.Round, Gladiator.Strikes, Gladiator.FightDmg, Opponent.Name);
+                        S.msg = S.VictoryMsg;
+                        S.AddToList(Enemys.Round, Gladiator.Strikes, Gladiator.FightDmg, S.msg, Opponent.Name);
+                        Gladiator.Health++;             // add 1 health for victory
+
+                        Console.WriteLine();
+                        Console.WriteLine("Chose if u wanna try ur luck on a weapon or armor");
+                        Console.WriteLine("1: For armor hunting");
+                        Console.WriteLine("2: For weapon hunting");
+                        Console.WriteLine("3: Hardcore, no weapon or amror hunt");
+                        int itemChoise = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine();
+
+                        switch (itemChoise)
+                        {
+                            case 1:
+                                items.ArmorEquipemnt();
+                                break;
+
+                            case 2:
+                                items.WeaponEquipment();
+                                break;
+
+                            default:
+                                Console.WriteLine("brave warrior");
+                                break;
+                        }
+                        Console.WriteLine();
                     }
 
                     Gladiator.FightDmg = 0;
@@ -106,6 +146,7 @@ namespace GladiatorGame
                     if (P1 == Gladiator)
                     {
                         Gladiator.RemoveEnemy();
+                        Slaughtered.AddToList(Opponent.Name);
                     }
                     else if (P2 == Gladiator || Gladiator.Health <= 0)
                     {
@@ -125,22 +166,30 @@ namespace GladiatorGame
                     P1 = Gladiator;
                     P2 = Opponent;
                 }
+                if (items.UsingArmor)
+                {
+                Gladiator.Health -= items.Armor;        //to not add more armor points
+                }
+                if (items.UsingWeapon)
+                {
+                    Gladiator.Strenght -= items.Weapon;     //to not add more weapon points
+                }
             }
         }
 
-        public void DisplayStartInfo(Player Gladiator, Player Opponent, Player Enemys)
+        public void DisplayStartInfo(player Gladiator, player Opponent, player Enemys)
         {
             Console.WriteLine();
             Console.WriteLine($"Round {Enemys.Round}");
             Console.WriteLine();
-            Console.WriteLine($"Gladiator: {Gladiator.Name}");
-            Console.WriteLine($"Gladiator HP {Gladiator.Health}");
-            Console.WriteLine($"Gladiator Str {Gladiator.Strenght}");
-            Console.WriteLine();
-            Console.WriteLine($"Opponent: {Opponent.Name}");
-            Console.WriteLine($"Opponent HP {Opponent.Health}");
-            Console.WriteLine($"Opponent Str {Opponent.Strenght}");
-            Console.WriteLine("-----------------------------");
+            Console.WriteLine($"Gladiator: {Gladiator.Name}\t\tOpponent: {Opponent.Name}");
+            Console.WriteLine($"Gladiator HP:  {Gladiator.Health}\tOpponent: {Opponent.Health}");
+            Console.WriteLine($"Gladiator Str: {Gladiator.Strenght}\tOpponent: {Opponent.Strenght}");
+            //Console.WriteLine();
+            //Console.WriteLine($"Opponent: {Opponent.Name}");              //Flyttade
+            //Console.WriteLine($"Opponent HP {Opponent.Health}");          //Flyttade
+            //Console.WriteLine($"Opponent Str {Opponent.Strenght}");       //Flyttade
+            Console.WriteLine("--------------------------------------------------------------------");
             Console.WriteLine();
         }
     }
