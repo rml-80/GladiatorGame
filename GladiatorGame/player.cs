@@ -9,12 +9,13 @@ namespace GladiatorGame
         public player() { }
 
         public player(string Name, int Health, int Strenght)
-        { 
+        {
             this.Name = Name;
             this.Health = Health;
             this.Strenght = Strenght;
+            Advantage = 3;
         }
-        public player(string Name, int Health, int Strenght,int Strikes, int Damage)
+        public player(string Name, int Health, int Strenght, int Strikes, int Damage, int Points)
         {
             this.Name = Name;
             this.Health = Health;
@@ -33,6 +34,7 @@ namespace GladiatorGame
         public int TotalDmg { get; set; }
         public int FightDmg { get; set; }
         public int Round { get; set; }
+        public int Advantage { get; set; }
 
         // methods to calculate damage // TODO random for damage calculation???
         public int Fist()
@@ -54,7 +56,7 @@ namespace GladiatorGame
         }
 
         public List<String> EnemyNames = new List<String>();
-        
+
         public void EnemyNamelist()
         {
             EnemyNames.Add("Cassius Gabinius");

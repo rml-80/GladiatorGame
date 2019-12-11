@@ -31,6 +31,13 @@ namespace GladiatorGame
             Equipment items = new Equipment();
             Slaughter Slaughter = new Slaughter();
 
+            int MinValueHealth = 10;
+            int MaxValueHealth = 20;
+            int MinValueStrength = 5;
+            int MaxValueStrength = 10;
+            items.UsedArmor = false;
+            items.UsedWeapon = false;
+
             Console.WriteLine("------------------------------------------------------");
             Console.WriteLine("--------------- Welcome to the arena!! ---------------");
             Console.WriteLine("The challangers fights untill death, ppl place ur bets");
@@ -44,26 +51,60 @@ namespace GladiatorGame
             Console.WriteLine("------------------------------------------------------");
 
             //Create Gladiator 
-            player Gladiator = new player(name, rnd.Next(10, 20), rnd.Next(5, 10), 0, 0);
+            player Gladiator = new player(name, rnd.Next(MinValueHealth, MaxValueHealth), rnd.Next(MinValueStrength, MaxValueStrength), 0, 0, 0);
 
             Gladiator.EnemyNamelist();
             Enemys.Round = 1;       //start counting rounds on 1
-
+            Gladiator.Advantage = 2;
             while (loop)
             {
                 Console.WriteLine();
 
                 if (Gladiator.EnemyNames.Count <= 0)    //if enemylist is empty end game
-                {
+                {                                   // Show stats!!!!
                     Console.WriteLine("------------------------------------------------------");
                     Console.WriteLine($"All Opponents has been beaten. You are the champion!!!!");
                     Console.WriteLine("------------------------------------------------------");
+                    Console.WriteLine("----------- Game created by Daniel & Risto -----------");
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to quit");
                     Console.ReadKey();
-                    Console.WriteLine("------------ Game created by Daniel & Risto ------------");
                     break;      //break out of the game
                 }
-                player Opponent = new player(Gladiator.EnemyNames[0], rnd.Next(10, 18), rnd.Next(5, 10), 0, 0);     //Generate new opponent for each fight
 
+                if (Enemys.Round == 4)
+                {
+                    Gladiator.Advantage--;
+                }
+                else if (Enemys.Round == 7)
+                {
+                    Gladiator.Advantage--;
+                }
+                int MaxHealthEnemy = Gladiator.Health - Gladiator.Advantage;
+                int MaxStrengthEnemy = Gladiator.Strenght - Gladiator.Advantage;
+
+                if (Gladiator.Health - Gladiator.Advantage < MinValueHealth)
+                {
+                    MaxHealthEnemy = MinValueHealth + 1;
+                }
+                if (Gladiator.Strenght - Gladiator.Advantage < MinValueStrength)
+                {
+                    MaxStrengthEnemy = MinValueStrength + 1;
+                }
+
+                player Opponent = new player(Gladiator.EnemyNames[0], rnd.Next(MinValueHealth, MaxHealthEnemy), rnd.Next(MinValueStrength, MaxStrengthEnemy), 0, 0,0);     //Generate new opponent for each fight
+
+                Console.WriteLine();
+                if (S.Points == 0)
+                {
+                    Console.WriteLine("You have not earned any points yet! Start playing.");
+                }
+                else
+                {
+                    Console.WriteLine($"Have earned {S.Points} points");
+
+                }
+                Console.WriteLine($"Your health is: {Gladiator.Health}\tYour Strenght is: {Gladiator.Strenght}");
                 Console.WriteLine();
                 Console.WriteLine("Now where do we wanna send the gladiator??");
                 Console.WriteLine("------------------------------------------------------");
@@ -98,7 +139,7 @@ namespace GladiatorGame
 
                     case 3:
                         Console.WriteLine();
-                        Console.WriteLine($"Enemys left: {Gladiator.EnemyNames.Count}");                
+                        Console.WriteLine($"Enemys left: {Gladiator.EnemyNames.Count}");
                         foreach (var item in Gladiator.EnemyNames)
                         {
                             Console.WriteLine(item);

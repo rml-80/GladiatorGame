@@ -15,6 +15,7 @@ namespace GladiatorGame
         public int Strikes { get; set; }
         public int Damage { get; set; }
         public String Beaten { get; set; }
+        public int Points { get; set; }
         public List<Statistics> Stat { get; set; }
         public string VictoryMsg = "You just slaughtered ";
         public string LosingMsg = "You have been beaten by ";
@@ -22,11 +23,12 @@ namespace GladiatorGame
 
         public void AddToList(int Round, int Strike, int Damage, string msg, string Beaten)
         {
-            Stat.Add(new Statistics { Round = Round, Strikes = Strike, Damage = Damage, msg = msg, Beaten= Beaten   });
+            Stat.Add(new Statistics { Round = Round, Strikes = Strike, Damage = Damage, msg = msg, Beaten = Beaten });
         }
         public void DisplayStat()
         {
             Console.WriteLine();
+            Console.WriteLine($"You have earned {Points}");
             Console.WriteLine($"Round  Strikes  Damage   Opponent");
 
             foreach (var item in Stat)

@@ -14,9 +14,13 @@ namespace GladiatorGame
         public bool UsingWeapon { get; set; }
         public bool HaveArmor { get; set; }
         public bool HaveWeapon { get; set; }
+        public bool UsedArmor { get; set; }
+        public bool UsedWeapon { get; set; }
+
 
         public void ArmorEquipemnt()
         {
+            
             int rngArmor = rnd.Next(0, 4);
 
             if (HaveArmor)
@@ -33,7 +37,7 @@ namespace GladiatorGame
                 {
                     if (Armor >= 2)
                     {
-                        Console.WriteLine("you already have a better armor than the one you fund, better luck next time");
+                        Console.WriteLine("you already have a better armor than the one you found, better luck next time");
                         HaveArmor = true;
                     }
                     else

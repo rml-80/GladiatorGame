@@ -12,13 +12,15 @@ namespace GladiatorGame
             var P1 = Gladiator;
             var P2 = Opponent;
 
-            if (items.UsingArmor)
+            if (items.UsingArmor && !items.UsedArmor)
             {
-            Gladiator.Health += items.Armor;        //idea to add ArmorPoints
+                Gladiator.Health += items.Armor;        //idea to add ArmorPoints
+                items.UsedArmor = true;
             }
-            if (items.UsingWeapon)
+            if (items.UsingWeapon && !items.UsedWeapon)
             {
-            Gladiator.Strenght += items.Weapon;     //idea to add WeaponPoints
+                Gladiator.Strenght += items.Weapon;     //idea to add WeaponPoints
+                items.UsedWeapon = true;
             }
 
             Random rnd = new Random();
@@ -107,12 +109,28 @@ namespace GladiatorGame
                         items.HaveWeapon = false;            // losing Weapon if beaten
                         items.UsingArmor = false;            // losing armor if beaten
                         items.UsingWeapon = false;            // losing Weapon if beaten
+                        items.UsedArmor = false;
+                        items.UsedWeapon = false;
+                        S.Points -= 100;
                     }
                     else
                     {
+                        if (Enemys.Round < 4)
+                        {
+                            S.Points += 100;
+                        }
+                        else if (Enemys.Round >= 8)
+                        {
+                            S.Points += 400;
+                        }
+                        else
+                        {
+                            S.Points += 200;
+                        }
                         S.msg = S.VictoryMsg;
                         S.AddToList(Enemys.Round, Gladiator.Strikes, Gladiator.FightDmg, S.msg, Opponent.Name);
                         Gladiator.Health++;             // add 1 health for victory
+
 
                         Console.WriteLine();
                         Console.WriteLine("Chose if u wanna try ur luck on a weapon or armor");
@@ -138,7 +156,7 @@ namespace GladiatorGame
                         }
                         Console.WriteLine();
                     }
-
+                    Enemys.Wins += Opponent.Wins;
                     Gladiator.FightDmg = 0;
                     Gladiator.Strikes = 0;
                     Enemys.Round++;
@@ -165,14 +183,6 @@ namespace GladiatorGame
                 {
                     P1 = Gladiator;
                     P2 = Opponent;
-                }
-                if (items.UsingArmor)
-                {
-                Gladiator.Health -= items.Armor;        //to not add more armor points
-                }
-                if (items.UsingWeapon)
-                {
-                    Gladiator.Strenght -= items.Weapon;     //to not add more weapon points
                 }
             }
         }
