@@ -35,6 +35,7 @@ namespace GladiatorGame
         public int FightDmg { get; set; }
         public int Round { get; set; }
         public int Advantage { get; set; }
+        public int Level { get; private set; }
 
         // methods to calculate damage // TODO random for damage calculation???
         public int Fist()
@@ -55,20 +56,30 @@ namespace GladiatorGame
             return dmg;
         }
 
-        public List<String> EnemyNames = new List<String>();
+        public List<player> EnemyNames = new List<player>();
 
         public void EnemyNamelist()
         {
-            EnemyNames.Add("Cassius Gabinius");
-            EnemyNames.Add("Marcellus Burrienus");
-            EnemyNames.Add("Agaza Kingspell");
-            EnemyNames.Add("Jaenwilliams Pomar");
-            EnemyNames.Add("Antibar Satanbennett");
-            EnemyNames.Add("Roberfang O'neilllok");
-            EnemyNames.Add("Drusprice Rosenker");
-            EnemyNames.Add("Peaknee Glenalvare");
-            EnemyNames.Add("Ortiphine Jonefur");
-            EnemyNames.Add("Willpatterson Graylok");
+            EnemyNames.Add(new player { Name = "Cassius Gabinius", Level = 1 });
+            EnemyNames.Add(new player { Name = "Marcellus Burrienus", Level = 1 });
+            EnemyNames.Add(new player { Name = "Agaza Kingspell", Level = 1 });
+            EnemyNames.Add(new player { Name = "Jaenwilliams Pomar", Level = 2 });
+            EnemyNames.Add(new player { Name = "Antibar Satanbennett", Level = 2 });
+            EnemyNames.Add(new player { Name = "Roberfang O'neilllok", Level = 2 });
+            EnemyNames.Add(new player { Name = "Drusprice Rosenker", Level = 3 });
+            EnemyNames.Add(new player { Name = "Peaknee Glenalvare", Level = 3 });
+            EnemyNames.Add(new player { Name = "Ortiphine Jonefur", Level = 3 });
+            EnemyNames.Add(new player { Name = "Willpatterson Graylok", Level = 4 });
+            //EnemyNames.Add("Cassius Gabinius");y
+            //EnemyNames.Add("Marcellus Burrienus");
+            //EnemyNames.Add("Agaza Kingspell");
+            //EnemyNames.Add("Jaenwilliams Pomar");
+            //EnemyNames.Add("Antibar Satanbennett");
+            //EnemyNames.Add("Roberfang O'neilllok");
+            //EnemyNames.Add("Drusprice Rosenker");
+            //EnemyNames.Add("Peaknee Glenalvare");
+            //EnemyNames.Add("Ortiphine Jonefur");
+            //EnemyNames.Add("Willpatterson Graylok");
         }
 
         public void RemoveEnemy()

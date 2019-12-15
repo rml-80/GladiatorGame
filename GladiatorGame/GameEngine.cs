@@ -12,24 +12,12 @@ namespace GladiatorGame
             var P1 = Gladiator;
             var P2 = Opponent;
 
-            //if (items.UsingArmor && !items.UsedArmor)
-            //{
-            //    Gladiator.Health += items.Armor;        //idea to add ArmorPoints
-            //    items.UsedArmor = true;
-            //}
-            //if (items.UsingWeapon && !items.UsedWeapon)
-            //{
-            //    Gladiator.Strenght += items.Weapon;     //idea to add WeaponPoints
-            //    items.UsedWeapon = true;
-            //}
-
             Random rnd = new Random();
             if (rnd.Next(0, 10) < 5)
             {
                 P1 = Opponent;
                 P2 = Gladiator;
             }
-
             while (true)
             {
                 int choice;
@@ -40,7 +28,6 @@ namespace GladiatorGame
 
                 if (P1 == Gladiator)
                 {
-
                     Console.WriteLine("-------------------------");
                     Console.WriteLine("Choose your strike method");
                     Console.WriteLine("1. Fist");
@@ -49,13 +36,11 @@ namespace GladiatorGame
                     Console.WriteLine("-------------------------");
 
                     choice = Convert.ToInt32(Console.ReadLine());
-
                 }
                 else
                 {
                     choice = rnd.Next(1, 3);
                 }
-
                 switch (choice)
                 {
                     case 1:
@@ -82,7 +67,6 @@ namespace GladiatorGame
                     default:
                         break;
                 }
-
                 P1.Strikes++;
                 Gladiator.TotalStrikes += Gladiator.Strikes;
                 P1.FightDmg += P1.Damage;
@@ -109,8 +93,7 @@ namespace GladiatorGame
                         items.HaveWeapon = false;            // losing Weapon if beaten
                         items.UsingArmor = false;            // losing armor if beaten
                         items.UsingWeapon = false;            // losing Weapon if beaten
-                        items.UsedArmor = false;
-                        items.UsedWeapon = false;
+
                         S.Points -= 100;
                     }
                     else
@@ -189,7 +172,6 @@ namespace GladiatorGame
                 }
             }
         }
-
         public void DisplayStartInfo(player Gladiator, player Opponent, player Enemys)
         {
             Console.WriteLine();

@@ -10,10 +10,11 @@ using System.IO;
 namespace GladiatorGame
 {
     class report
-    {
+    {            
+        String fileName = @"C:\users\lohta\desktop\Gladiator.txt";
         public void CreateReport(List<String> Slaughtered,string name, int points)
         {
-            String fileName = @"C:\users\lohta\desktop\Gladiator.txt";
+
 
             using (StreamWriter fs = new StreamWriter(fileName, true))
             {
@@ -28,6 +29,11 @@ namespace GladiatorGame
                 }
                 fs.WriteLine("");
             }
+        }
+
+        public void DeleteSaves()
+        {
+            File.WriteAllText(fileName, String.Empty);
         }
 
     }

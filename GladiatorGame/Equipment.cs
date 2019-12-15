@@ -261,11 +261,11 @@ namespace GladiatorGame
                             if (b == "y")
                             {
                                 UsingWeapon = false;
+                                Gladiator.Strenght -= Weapon;
                             }
                             else
                             {
                                 UsingWeapon = true;
-                                Gladiator.Strenght -= Weapon;
                             }
                         }
                         else
@@ -279,7 +279,7 @@ namespace GladiatorGame
                             else
                             {
                                 UsingWeapon = true;
-                                Gladiator.Strenght -= Weapon;
+                                Gladiator.Strenght += Weapon;
 
                             }
                         }

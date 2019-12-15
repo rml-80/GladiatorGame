@@ -25,18 +25,18 @@ namespace GladiatorGame
         {
             Random rnd = new Random();
             Boolean loop = true;
-
             player Enemys = new player();
             Statistics S = new Statistics();
             Equipment items = new Equipment();
             Slaughter Slaughter = new Slaughter();
-
+            report R = new report();
             int MinValueHealth = 10;
             int MaxValueHealth = 20;
             int MinValueStrength = 5;
             int MaxValueStrength = 10;
             items.UsedArmor = false;
             items.UsedWeapon = false;
+            int j = 0;
 
             Console.WriteLine("------------------------------------------------------");
             Console.WriteLine("--------------- Welcome to the arena!! ---------------");
@@ -53,9 +53,9 @@ namespace GladiatorGame
             //Create Gladiator 
             player Gladiator = new player(name, rnd.Next(MinValueHealth, MaxValueHealth), rnd.Next(MinValueStrength, MaxValueStrength), 0, 0, 0);
 
-            Gladiator.EnemyNamelist();
-            Enemys.Round = 1;       //start counting rounds on 1
-            Gladiator.Advantage = 2;
+            Gladiator.EnemyNamelist(); // create list with enemys
+            Enemys.Round = 1;       //start counting rounds on 1. THIS should be redone.
+            Gladiator.Advantage = 2;    // set advantage for Gladiator
             while (loop)
             {
                 Console.WriteLine();
@@ -69,12 +69,13 @@ namespace GladiatorGame
                     Console.WriteLine();
                     Console.WriteLine("Press any key to quit");
                     Console.ReadKey();
+                    R.CreateReport(Slaughter.Slaughtered,Gladiator.Name, S.Points);
                     break;      //break out of the game
                 }
 
                 if (Enemys.Round == 4)
                 {
-                    Gladiator.Advantage--;
+                    Gladiator.Advantage--;  //if
                 }
                 else if (Enemys.Round == 7)
                 {
@@ -92,7 +93,7 @@ namespace GladiatorGame
                     MaxStrengthEnemy = MinValueStrength + 1;
                 }
 
-                player Opponent = new player(Gladiator.EnemyNames[0], rnd.Next(MinValueHealth, MaxHealthEnemy), rnd.Next(MinValueStrength, MaxStrengthEnemy), 0, 0, 0);     //Generate new opponent for each fight
+                player Opponent = new player(Gladiator.EnemyNames[0].Name, rnd.Next(MinValueHealth, MaxHealthEnemy), rnd.Next(MinValueStrength, MaxStrengthEnemy), 0, 0, 0);     //Generate new opponent for each fight
 
                 Console.WriteLine();
                 if (S.Points == 0)
@@ -113,7 +114,8 @@ namespace GladiatorGame
                 Console.WriteLine("Choise 2: Check stats from all fight");
                 Console.WriteLine("Choise 3: Enemy list");
                 Console.WriteLine("Choise 4: Statistics");
-                Console.WriteLine("Choise 5: Armors and Weapons COMING SOON!!!");
+                Console.WriteLine("Choise 5: Armors and Weapons");
+                Console.WriteLine("Choise 8: Delete Highscores");
                 Console.WriteLine("Choise 9: Exit the game");
                 Console.WriteLine("------------------------------------------------------");
 
@@ -140,10 +142,47 @@ namespace GladiatorGame
                     case 3:
                         Console.WriteLine();
                         Console.WriteLine($"Enemys left: {Gladiator.EnemyNames.Count}");
-                        foreach (var item in Gladiator.EnemyNames)
+                        Console.WriteLine();
+                        
+                        for (int i = 0; i < Gladiator.EnemyNames.Count; i++)
                         {
-                            Console.WriteLine(item);
+                            if (i == 0)
+                            {
+                                // needed when one enemy left to print Final Boss
+                                if (Gladiator.EnemyNames[i].Level == 4)
+                                {
+                                    Console.WriteLine("Final Boss:");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Level " + Gladiator.EnemyNames[i].Level + ":");
+                                }
+                                Console.WriteLine(Gladiator.EnemyNames[i].Name);
+                                
+                            }
+                            else
+                            {
+                                if (Gladiator.EnemyNames[i].Level == Gladiator.EnemyNames[i - 1].Level)
+                                {
+                                    Console.WriteLine(Gladiator.EnemyNames[i].Name);
+                                }
+                                else
+                                {
+                                    // Print Final Boss for the 10th enemy
+                                    if (Gladiator.EnemyNames[i].Level == 4)
+                                    {
+                                        Console.WriteLine("Final Boss:");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Level " + Gladiator.EnemyNames[i].Level + ":");
+                                    }
+                                    Console.WriteLine(Gladiator.EnemyNames[i].Name);
+                                }
+                                
+                            }
                         }
+
                         Console.WriteLine();
                         Console.WriteLine($"Enemys slaughtered: {Slaughter.Slaughtered.Count}");
                         foreach (var item in Slaughter.Slaughtered)
@@ -152,14 +191,25 @@ namespace GladiatorGame
                         }
                         break;
 
+
                     case 4:
                         S.DisplayStat();
                         break;
                     case 5:
                         items.Display_A_W(Gladiator);
                         break;
+                    case 8:
+                        R.DeleteSaves();
+                        Console.WriteLine("Are uou sure? y/n?");
+                        var a = Console.ReadLine();
+                        if (a == "y")
+                        {
+                            Console.WriteLine("Highscores deleted!");
+                        }      
+                        break;
                     case 9:
                         loop = false;
+                        R.CreateReport(Slaughter.Slaughtered,Gladiator.Name,S.Points);
                         break;
 
                     default:
