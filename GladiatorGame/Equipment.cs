@@ -18,9 +18,9 @@ namespace GladiatorGame
         public bool UsedWeapon { get; set; }
 
 
-        public void ArmorEquipemnt()
+        public void ArmorEquipemnt(player Gladiator)
         {
-            
+
             int rngArmor = rnd.Next(0, 4);
 
             if (HaveArmor)
@@ -50,6 +50,7 @@ namespace GladiatorGame
                         if (a == "y")
                         {
                             UsingArmor = true;
+                            Gladiator.Health += Armor;
                         }
                         else
                         {
@@ -63,6 +64,18 @@ namespace GladiatorGame
                     Armor = 4;
                     Console.WriteLine("You found a {0}", Armor);
                     HaveArmor = true;
+                    Console.Write("Would you like to put it on? y/n? ");
+
+                    var a = Console.ReadLine();
+                    if (a == "y")
+                    {
+                        UsingArmor = true;
+                        Gladiator.Health += Armor;
+                    }
+                    else
+                    {
+                        UsingArmor = false;
+                    }
                 }
                 if (!HaveArmor || !UsingArmor)
                 {
@@ -72,7 +85,7 @@ namespace GladiatorGame
             Console.WriteLine();
         }
 
-        public void WeaponEquipment()
+        public void WeaponEquipment(player Gladiator)
         {
             int rngWeapon = rnd.Next(0, 4);
 
@@ -103,6 +116,7 @@ namespace GladiatorGame
                         if (a == "y")
                         {
                             UsingWeapon = true;
+                            Gladiator.Strenght += Weapon;
                         }
                         else
                         {
@@ -116,8 +130,19 @@ namespace GladiatorGame
                     Weapon = 4;
                     Console.WriteLine("You found a {0}", Weapon);
                     HaveWeapon = true;
+                    Console.Write("Would you like to use it? y/n? ");
+                    var a = Console.ReadLine();
+                    if (a == "y")
+                    {
+                        UsingWeapon = true;
+                        Gladiator.Strenght += Weapon;
+                    }
+                    else
+                    {
+                        UsingWeapon = false;
+                    }
                 }
-                if (!HaveWeapon || !HaveArmor)
+                if (!HaveWeapon || !UsingWeapon)
                 {
                     Armor = 0;
                 }
@@ -196,6 +221,7 @@ namespace GladiatorGame
                             if (b == "y")
                             {
                                 UsingArmor = false;
+                                Gladiator.Health -= Armor;
                             }
                             else
                             {
@@ -213,6 +239,8 @@ namespace GladiatorGame
                             else
                             {
                                 UsingArmor = true;
+                                Gladiator.Health += Armor;
+
                             }
                         }
                     }
@@ -237,6 +265,7 @@ namespace GladiatorGame
                             else
                             {
                                 UsingWeapon = true;
+                                Gladiator.Strenght -= Weapon;
                             }
                         }
                         else
@@ -250,6 +279,8 @@ namespace GladiatorGame
                             else
                             {
                                 UsingWeapon = true;
+                                Gladiator.Strenght -= Weapon;
+
                             }
                         }
                     }

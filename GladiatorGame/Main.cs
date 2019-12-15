@@ -92,7 +92,7 @@ namespace GladiatorGame
                     MaxStrengthEnemy = MinValueStrength + 1;
                 }
 
-                player Opponent = new player(Gladiator.EnemyNames[0], rnd.Next(MinValueHealth, MaxHealthEnemy), rnd.Next(MinValueStrength, MaxStrengthEnemy), 0, 0,0);     //Generate new opponent for each fight
+                player Opponent = new player(Gladiator.EnemyNames[0], rnd.Next(MinValueHealth, MaxHealthEnemy), rnd.Next(MinValueStrength, MaxStrengthEnemy), 0, 0, 0);     //Generate new opponent for each fight
 
                 Console.WriteLine();
                 if (S.Points == 0)
